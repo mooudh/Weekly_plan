@@ -1,40 +1,58 @@
-<script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String,
-})
-
-const count = ref(0)
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+  <div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th v-for="day in days" :key="day">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="hour in hours" :key="hour">
+          <td>{{ hour }}</td>
+          <td v-for="day in days" :key="day">
+            <input type="text" v-model="plans[day][hour]" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>
+<script setup>
+import { reactive } from "vue";
+
+const days = reactive([
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+]);
+
+const hours = reactive([
+  "8:00",
+
+  "10:00",
+  "12:00",
+  "14:00",
+  "16:00",
+  "18:00",
+  "20:00",
+  "22:00",
+]);
+
+const plans = reactive({
+  Monday: {},
+  Tuesday: {},
+  Wednesday: {},
+  Thursday: {},
+  Friday: {},
+  Saturday: {},
+  Sunday: {},
+});
+</script>
+
+<style lang="scss" scoped></style>
